@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | College Event Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">College Events</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link active" href="register.html">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="myevents.html">My Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Registration Form -->
+  <div class="container mt-5 mb-5">
+    <h2 class="text-center mb-4">Event Registration</h2>
+    <form id="registrationForm" class="p-4 border rounded bg-light shadow">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input type="text" id="fullName" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label for="rollNumber" class="form-label">Roll Number</label>
+          <input type="text" id="rollNumber" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="department" class="form-label">Department</label>
+          <select id="department" class="form-select" required>
+            <option value="">Choose...</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECH</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="eventName" class="form-label">Select Event</label>
+          <select id="eventName" class="form-select" required>
+            <option value="">Choose...</option>
+            <option>Hackathon 2025</option>
+            <option>Cultural Fiesta</option>
+            <option>Football Tournament</option>
+            <option>Robotics Expo</option>
+            <option>Photography Contest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile Number</label>
+        <input type="tel" id="mobile" class="form-control" required maxlength="10" pattern="[0-9]{10}">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-success btn-lg">Register</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="successModalLabel">Registration Successful</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Thank you for registering! Check your registered events in <strong>My Events</strong> page.
+        </div>
+        <div class="modal-footer">
+          <a href="myevents.html" class="btn btn-primary">Go to My Events</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    &copy; 2025 College Event Management System
+  </footer>
+
+  <!-- Bootstrap + JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const form = document.getElementById('registrationForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Basic validations
+      const name = document.getElementById('fullName').value.trim();
+      const roll = document.getElementById('rollNumber').value.trim();
+      const dept = document.getElementById('department').value;
+      const email = document.getElementById('email').value.trim();
+      const mobile = document.getElementById('mobile').value.trim();
+      const selectedEvent = document.getElementById('eventName').value;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const mobileRegex = /^[0-9]{10}$/;
+
+      if (!name || !roll || !dept || !email || !mobile || !selectedEvent) {
+        alert('Please fill all fields!');
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        alert('Invalid email format!');
+        return;
+      }
+
+      if (!mobileRegex.test(mobile)) {
+        alert('Mobile number must be 10 digits!');
+        return;
+      }
+
+      // If all validations pass
+      const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+      successModal.show();
+
+      form.reset(); // Clear form after submission
+    });
+  </script>
+</body>
+</html>
