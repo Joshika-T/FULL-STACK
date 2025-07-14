@@ -1,0 +1,204 @@
+b<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: rgb(56, 54, 50);
+            color: bisque;
+        }
+        #bgvideo{
+            position:fixed;
+            right:0;
+            bottom:0;
+            min-width:100vw;
+            min-height:100vh;
+            object-fit:cover;
+            z-index: index -2;
+            opacity: 0.2;
+        }
+        header {
+            background-color: rgb(190, 119, 207);
+            color: beige;
+            padding: 10px;
+            text-align: center;
+        }
+        header a {
+            color: lavenderblush;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .menu-section{
+            padding: 40 20px;
+        }
+        .menu-section h2{
+            font-size: 30px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        .menu-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(220px, 1fr));
+            gap:30px;
+            margin-top: 20px;
+        }
+        .menu-item{
+            background: rgb(198, 73, 73);
+            border: 2px solid black;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px black;
+        }
+        .menu-item:hover{
+            transform: scale(1.1);
+        }
+        .menu-item h3,p{
+            font-size: x-large;
+        }
+        footer{
+            background-color: rgb(23, 14, 25);
+            color: beige;
+            padding: 3px;
+            text-align: center;
+        }
+        .menu-item img{
+            width: 100%;
+            height:auto;
+            border-radius: 10px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+</head>
+<body>
+    <video autoplay muted loop id ="bgvideo">
+        <source src="video html.mp4"type="video/mp4">
+    </video>
+    <header>
+        <h1>Welcome to Josh-Mart</h1>
+        <p>All your needs in one shop..</p>
+        <nav>
+            <a href="">Items</a>
+            <a href="">Contact</a>
+            <a href="">Services</a>
+        </nav>
+    </header>
+    <div class="menu-section">
+        <h2>Grocery</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <a href = "cool drinks.html"><img src = "chocalate.jpg"alt=""</a>
+                <img src="cool drinks.jpg" alt=" "
+                <h3>Cooldrinks</h3>
+                <p>very sweet Items</p>
+                <span>$5.6</span>
+            </div>
+            <div class="menu-item">
+                <img src= "Choclates.jpg" alt=" "
+                <h3>Chocolates</h3>
+                <p>very sweet Items</p>
+                <span>$4.5</span>
+            </div>
+            <div class="menu-item">
+                <img src= "icecream.jpeg" alt=" "
+                <h3>Ice Creams</h3>
+                <p>very sweet Items</p>
+                <span>$6.6</span>
+            </div>
+            <div class="menu-item">
+                <img src= "cakes.jpg" alt=" "
+                <h3>Cakes</h3>
+                <p>very sweet Items</p>
+                <span>$3.6</span>
+            </div>
+        </div>
+        <h2>Electroncis</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src= "mobile.jpg" alt=" " 
+                <h3>Mobile Phones</h3>
+                <p>very Good Quality</p>
+                <span>$15.6</span>
+            </div>
+            <div class="menu-item">
+                  <img src= "laptop.jpg" alt=" "
+                <h3>Laptop</h3>
+                <p>very Good Quality</p>
+                <span>$14.5</span>
+            </div>
+            <div class="menu-item">
+                <img src= "earbuds.jpg" alt=" "
+                <h3>Buds</h3>
+                <p>very Good Quality</p>
+                <span>$8.6</span>
+            </div>
+            <div class="menu-item">
+                <img src= "watches.jpg" alt=" "
+                <h3>Smart Watches</h3>
+                <p>very Good Quality</p>
+                <span>$7.6</span>
+            </div>
+        </div>
+        <h2>Dresses</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                 <img src= "halfsaree.jpg" alt=" "
+                <h3>Half Saree</h3>
+                <p>Good Items</p>
+                <span>$4.3</span>
+            </div>
+            <div class="menu-item">
+                 <img src= "jeans.jpg" alt=" "
+                <h3>jeans</h3>
+                <p>Good Items</p>
+                <span>$2.5</span>
+            </div>
+            <div class="menu-item">
+                 <img src= "kurthis.jpg".jpg" alt=" "
+                <h3>Kurthis</h3>
+                <p>Good Items</p>
+                <span>$3.2</span>
+            </div>
+            <div class="menu-item">
+                 <img src= "tops.jpg" alt=" "
+                <h3>Tops</h3>
+                <p>Good Items</p>
+                <span>$2.1</span>
+            </div>
+        </div>
+        <h2>Footwear</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src= "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg"alt=" "
+                <h3>Shoes</h3>
+                <p>Quality</p>
+                <span>$1.6</span>
+            </div>
+            <div class="menu-item">
+                <img src= "https://images.pexels.com/photos/1507351/pexels-photo-1507351.jpeg"alt=" "
+                <h3>Heals</h3>
+                <p>Quality</p>
+                <span>$1.5</span>
+            </div>
+            <div class="menu-item">
+                <img src= "https://images.pexels.com/photos/1630992/pexels-photo-1630992.jpeg" alt=" "
+                <h3>Crocks</h3>
+                <p>Quality</p>
+                <span>$1.6</span>
+            </div>
+            <div class="menu-item">
+                <img src= "https://images.pexels.com/photos/8635546/pexels-photo-8635546.jpeg"alt=" "
+                <h3>flats</h3>
+                <p>Quality</p>
+                <span>$2.6</span>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Josh-mart Shopping | More</p>
+        <p>Follow us on <a href="www.Josh-mart.com">www.Josh-mart.com</a></p>
+    </footer>
+</body>
+</html>
