@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="return validate(event)">
+        <label for="fname">Fname</label><br>
+        <input type="text" id="fname"><br>
+        <span id="err" style="color: red;"></span><br>
+
+        <label for="lname">Lname</label><br>
+        <input type="text" id="lname"><br>
+
+        <label for="email">Email</label><br>
+        <input type="text" id="email"><br>
+
+        <label for="password">Password</label><br>
+        <input type="text" id="password"><br>
+
+        <button type="submit">Login</button>
+    </form>
+    <script>
+        function validate(event) {
+            event.preventDefault();
+            let name = document.getElementById("fname").value;
+            if (name == "") {
+                document.getElementById("err").innerHTML= "Enter a name";
+                return false;
+            } else {
+                document.getElementById("err").innerHTML = "";
+                alert("Form submitted Successfully!");
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>
