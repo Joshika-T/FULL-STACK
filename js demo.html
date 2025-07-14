@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blood Donation Eligibility</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        header {
+            background-color: #0d47a1; /* Dark Blue */
+            color: #e3f2fd; /* Light Blue */
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        form {
+            background-color: #ffffff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.25);
+        }
+        label {
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+            color: #0d47a1;
+        }
+        input[type="number"], input[type="submit"] {
+            width: 100%;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1.8px solid #90caf9; /* light blue border */
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #0d47a1; /* Dark Blue */
+            box-shadow: 0 0 8px #1976d2;
+        }
+        input[type="submit"] {
+            background-color: #0d47a1; /* Dark Blue */
+            border: none;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #1565c0; /* Medium Blue */
+        }
+        #results {
+            margin-top: 10px;
+            font-weight: 700;
+            color: #0d47a1;
+            min-height: 22px;
+        }
+        footer {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blood Donation Eligibility Checker</h1>
+    </header>
+
+    <form id="eligibility_form" novalidate>
+        <label for="age">Age</label>
+        <input type="number" name="age" id="age" placeholder="Enter your age" min="1" required />
+
+        <label for="bloodCount">Blood Count</label>
+        <input type="number" name="bloodCount" id="bloodCount" placeholder="Enter your blood count" min="1" required />
+
+        <label for="hemoglobin">Hemoglobin</label>
+        <input type="number" name="hemoglobin" id="hemoglobin" placeholder="Enter your hemoglobin level" min="0" step="0.1" required />
+
+        <label for="sugar">Sugar</label>
+        <input type="number" name="sugar" id="sugar" placeholder="Enter your sugar level" min="0" step="0.1" required />
+
+        <input type="submit" value="Check Eligibility" id="checkEligibility" />
+        <div id="results"></div>
+    </form>
+
+    <footer>
+        ©2025 Blood Donation Eligibility
+    </footer>
+
+    <script>
+        document.getElementById("eligibility_form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const age = parseInt(document.getElementById("age").value);
+            const bloodCount = parseFloat(document.getElementById("bloodCount").value);
+            const hemoglobin = parseFloat(document.getElementById("hemoglobin").value);
+            const sugar = parseFloat(document.getElementById("sugar").value);
+            const results = document.getElementById("results");
+
+            if (
+                isNaN(age) || age <= 0 ||
+                isNaN(bloodCount) || bloodCount <= 0 ||
+                isNaN(hemoglobin) || hemoglobin <= 0 ||
+                isNaN(sugar) || sugar <= 0
+            ) {
+                results.textContent = "Please fill in all fields with valid positive numbers.";
+                return;
+            }
+
+            if (age >= 18) {
+                if (bloodCount > 1000000) {
+                    if (hemoglobin > 12) {
+                        if (sugar >= 80 && sugar <= 120) {
+                            results.textContent = "You are eligible to donate blood.";
+                        } else {
+                            results.textContent = "Your sugar level is out of the eligible range.";
+                        }
+                    } else {
+                        results.textContent = "Your hemoglobin level is too low.";
+                    }
+                } else {
+                    results.textContent = "Your blood count is too low.";
+                }
+            } else {
+                results.textContent = "You must be at least 18 years old to donate blood.";
+            }
+        });
+    </script>
+</body>
+</html>
