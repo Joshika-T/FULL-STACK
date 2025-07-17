@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//      switch case demonstartion
+     
+//          switch(expression){
+//          case value1:
+//             statements
+//         break;
+//         case value2:
+//             statements
+//         break;
+//         default:
+//             default statements
+//         break;
+//     }
+//     let name = prompt("Enter your name:")
+//     let marks = prompt("Enter your marks :")
+//     switch(true){
+//         case marks>=90:
+//             result = "Your are topper"
+//             break;
+//         case marks<90 && marks>=65:
+//             result = "second topper"
+//             break;
+//         case marks<65 && marks>=45:
+//             result = "you just passed"
+//             break;
+//         case marks<45:
+//             result = "You failed exam better luck next time!"
+//             break;
+//         default:
+//             result = "please enter your marks"
+//             break;
+//     }
+//     document.write("Hello"+name+"<h2>"+result+'</h2>')
+// ----------------------------------------------------------------------
+// For loop syntax
+//         for(initialization, condition,incre/decre){
+//             statements
+//         }
+
+//         for(a=0;a<=10;a++){
+//             document.write(a)
+//         }
+        
+        
+//         write a program to read a number from user,return the sum of factors of that number
+
+//         let number = prompt("Enter the number")
+//         for(i=0;i<=num;i++){
+//             if(num%i==0){
+//                 sum=sum+i
+//                 document.write(num)
+//             }
+//         }
+      let num = prompt("enter a number");
+      let original = num;
+      let rev = 0;
+      while(num>0){
+        dig = num%10;
+        rev = rev*10+dig;
+        num = Math.floor(num/10);
+      }
+      if (original == rev){
+        console.log("It is a palindrome")
+      }else{
+        console.log("It is not a palidrome")
+      }
+  </script>
+</body>
+</html>

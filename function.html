@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="h"></h1>
+    <input type="text" name="" id="log">
+    <input type="button" value="Login" id ="login" onclick="access()">
+</body>
+<script>
+    function access(){
+    let user_value = document.getElementById("log").value;
+    if (user_value == "Admin" ) {
+    document.getElementById("h").innerHTML = "WELCOME";
+} else {
+    document.getElementById('h').innerHTML = "Access Denied"
+}
+}
+</script>
+</html>
