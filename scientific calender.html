@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scientific Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 350px;
+      margin: 30px auto;
+      background: #f4f4f4;
+      padding: 10px;
+    }
+    h2 { text-align: center; }
+    #display {
+      width: 100%;
+      font-size: 1.5em;
+      padding: 10px;
+      margin-bottom: 15px;
+      text-align: right;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+    }
+    button {
+      flex: 1 0 18%;
+      padding: 15px;
+      font-size: 1.2em;
+      background: #ddd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover { background: #bbb; }
+  </style>
+</head>
+<body>
+
+  <h2>Scientific Calculator</h2>
+  <input type="text" id="display" placeholder="0" readonly />
+
+  <div class="buttons">
+    <!-- Row 1 -->
+    <button onclick="v('7')">7</button>
+    <button onclick="v('8')">8</button>
+    <button onclick="v('9')">9</button>
+    <button onclick="v('÷')">÷</button>
+    <button onclick="clr()">C</button>
+
+    <!-- Row 2 -->
+    <button onclick="v('4')">4</button>
+    <button onclick="v('5')">5</button>
+    <button onclick="v('6')">6</button>
+    <button onclick="v('×')">×</button>
+    <button onclick="bk()">⌫</button>
+
+    <!-- Row 3 -->
+    <button onclick="v('1')">1</button>
+    <button onclick="v('2')">2</button>
+    <button onclick="v('3')">3</button>
+    <button onclick="v('−')">−</button>
+    <button onclick="sq()">x²</button>
+
+    <!-- Row 4 -->
+    <button onclick="v('0')">0</button>
+    <button onclick="v('.')">.</button>
+    <button onclick="v('+')">+</button>
+    <button onclick="v('_')">_</button>
+    <button onclick="eq()">=</button>
+  </div>
+
+  <script>
+    const d = document.getElementById('display');
+    const v = val => d.value += val;
+    const clr = () => d.value = '';
+    const bk = () => d.value = d.value.slice(0, -1);
+    const norm = e => e.replace(/÷/g, '/').replace(/×/g, '*').replace(/−/g, '-').replace(/_/g, '');
+    const eq = () => {
+      try {
+        const r = Function('"use strict";return (' + norm(d.value) + ')')();
+        d.value = r ?? 'Error';
+      } catch { d.value = 'Error'; }
+    };
+    const sq = () => {
+      try {
+        const n = Function('"use strict";return (' + norm(d.value) + ')')();
+        d.value = !isNaN(n) ? n * n : 'Error';
+      } catch { d.value = 'Error'; }
+    };
+  </script>
+
+</body>
+</html>
