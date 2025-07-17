@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body img{
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Mouse Events -->
+     <button id="clickBtn"Click me></button>
+     <div id = "mousearea">Mouse over me</div>
+     <img id="im" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV1RlrbxJfEqwRJACDSVzfUmCqSdrP8QUkYA&s" alt="">
+
+     <!-- Keyboard Events -->
+      <input type="text" id="keyInput" placeholder="Type something" />
+
+      <!-- Form Events -->
+       <form id="sampleForm">
+        <input type="text" name="username" placeholder="Enter username" />
+        <select name="role" id="roleSelect">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+        </select>
+        <button type="submit">Submit</button>
+       </form>
+       <!-- Window Events -->
+        <p id="resizeText">Resize the window to trigger an evnet.</p>
+<script>
+    //  Mouse Events
+    document.getElementById("clickBtn").addEventListener("click",function() {
+        alert("Button Clicked!");
+    });
+
+    document.getElementById("mousearea").addEventListener("mouseover",function() {
+        this.style.backgroundColor = "#cfc";
+    });
+
+    document.getElementById("mousearea").addEventListener("mouseout",function() {
+        this.style.backgroundColor = "#eef";
+    });
+    // Keyboard Events
+    document.getElementById("KeyInput").addEventListener("keydown",function(e) {
+        console.log("key down: ",e.key);
+    });
+
+    document.getElementById("KeyInput").addEventListener("keyup",function(e) {
+        console.log("key up: ", e.key);
+    });
+
+    // Form Events
+     document.getElementById("sampleForm").addEventListener("submit",function(e) {
+        e.preventDefault();
+        alert("Form Submitted");
+    });
+    document.getElementById("roleSelect").addEventListener("change",function() {
+        alert("Role selected: "+ this.value);
+    });
+    // Window Event
+    window.addEventListener("resize", function() {
+        document.getElementById("resizeText").innerText = "window resized at: " + new Date().toLocaleTimeString()
+    });
+
+</script>
+</body>
+</html>
