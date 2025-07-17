@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Multi Converter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+  }
+  h2 {
+    margin-top: 40px;
+  }
+  label, select, input {
+    display: block;
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+  }
+  select {
+    padding: 6px;
+    font-size: 1rem;
+    width: 100%;
+  }
+  button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .result {
+    margin-top: 12px;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  hr {
+    margin: 30px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Multi Converter Tool</h1>
+
+<!-- Currency Converter -->
+<section>
+  <h2>Currency Converter</h2>
+  <label for="currencyAmount">Amount:</label>
+  <input type="number" id="currencyAmount" placeholder="Enter amount" />
+
+  <label for="currencyFrom">From:</label>
+  <select id="currencyFrom">
+    <option value="USD">USD - US Dollar</option>
+    <option value="EUR">EUR - Euro</option>
+    <option value="GBP">GBP - British Pound</option>
+    <option value="INR">INR - Indian Rupee</option>
+    <option value="JPY">JPY - Japanese Yen</option>
+  </select>
+
+  <label for="currencyTo">To:</label>
+  <select id="currencyTo">
+    <option value="USD">USD - US Dollar</option>
+    <option value="EUR">EUR - Euro</option>
+    <option value="GBP">GBP - British Pound</option>
+    <option value="INR">INR - Indian Rupee</option>
+    <option value="JPY">JPY - Japanese Yen</option>
+  </select>
+
+  <button onclick="convertCurrency()">Convert</button>
+  <div class="result" id="currencyResult"></div>
+</section>
+
+<hr />
+
+<!-- Temperature Converter -->
+<section>
+  <h2>Temperature Converter</h2>
+  <label for="tempInput">Temperature:</label>
+  <input type="number" id="tempInput" placeholder="Enter temperature" />
+
+  <label for="tempFrom">From:</label>
+  <select id="tempFrom">
+    <option value="C">Celsius (°C)</option>
+    <option value="F">Fahrenheit (°F)</option>
+    <option value="K">Kelvin (K)</option>
+  </select>
+
+  <label for="tempTo">To:</label>
+  <select id="tempTo">
+    <option value="C">Celsius (°C)</option>
+    <option value="F">Fahrenheit (°F)</option>
+    <option value="K">Kelvin (K)</option>
+  </select>
+
+  <button onclick="convertTemperature()">Convert</button>
+  <div class="result" id="tempResult"></div>
+</section>
+
+<hr />
+
+<!-- Area Converter -->
+<section>
+  <h2>Area Converter</h2>
+  <label for="areaInput">Area:</label>
+  <input type="number" id="areaInput" placeholder="Enter area" />
+
+  <label for="areaFrom">From:</label>
+  <select id="areaFrom">
+    <option value="sqm">Square meters (m²)</option>
+    <option value="sqft">Square feet (ft²)</option>
+    <option value="acre">Acres</option>
+  </select>
+
+  <label for="areaTo">To:</label>
+  <select id="areaTo">
+    <option value="sqm">Square meters (m²)</option>
+    <option value="sqft">Square feet (ft²)</option>
+    <option value="acre">Acres</option>
+  </select>
+
+  <button onclick="convertArea()">Convert</button>
+  <div class="result" id="areaResult"></div>
+</section>
+
+<hr />
+
+<!-- Distance Converter -->
+<section>
+  <h2>Distance Converter</h2>
+  <label for="distanceInput">Distance:</label>
+  <input type="number" id="distanceInput" placeholder="Enter distance" />
+
+  <label for="distanceFrom">From:</label>
+  <select id="distanceFrom">
+    <option value="m">Meters (m)</option>
+    <option value="km">Kilometers (km)</option>
+    <option value="mi">Miles (mi)</option>
+    <option value="ft">Feet (ft)</option>
+  </select>
+
+  <label for="distanceTo">To:</label>
+  <select id="distanceTo">
+    <option value="m">Meters (m)</option>
+    <option value="km">Kilometers (km)</option>
+    <option value="mi">Miles (mi)</option>
+    <option value="ft">Feet (ft)</option>
+  </select>
+
+  <button onclick="convertDistance()">Convert</button>
+  <div class="result" id="distanceResult"></div>
+</section>
+
+<script>
+  // Fixed demo exchange rates relative to USD
+  const exchangeRates = {
+    USD: 1,
+    EUR: 0.91,
+    GBP: 0.79,
+    INR: 82.5,
+    JPY: 139.7
+  };
+
+  function convertCurrency() {
+    const amount = parseFloat(document.getElementById('currencyAmount').value);
+    const from = document.getElementById('currencyFrom').value;
+    const to = document.getElementById('currencyTo').value;
+    const resultDiv = document.getElementById('currencyResult');
+
+    if (isNaN(amount)) {
+      resultDiv.textContent = 'Please enter a valid amount.';
+      return;
+    }
+
+    // Convert from 'from' currency to USD, then to 'to' currency
+    const amountInUSD = amount / exchangeRates[from];
+    const convertedAmount = amountInUSD * exchangeRates[to];
+
+    resultDiv.textContent = ${amount} ${from} = ${convertedAmount.toFixed(4)} ${to};
+  }
+
+  function convertTemperature() {
+    const temp = parseFloat(document.getElementById('tempInput').value);
+    const from = document.getElementById('tempFrom').value;
+    const to = document.getElementById('tempTo').value;
+    const resultDiv = document.getElementById('tempResult');
+
+    if (isNaN(temp)) {
+      resultDiv.textContent = 'Please enter a valid temperature.';
+      return;
+    }
+
+    let tempInCelsius;
+
+    // Convert input to Celsius
+    switch(from) {
+      case 'C': tempInCelsius = temp; break;
+      case 'F': tempInCelsius = (temp - 32) * 5/9; break;
+      case 'K': tempInCelsius = temp - 273.15; break;
+    }
+
+    let convertedTemp;
+
+    // Convert Celsius to target unit
+    switch(to) {
+      case 'C': convertedTemp = tempInCelsius; break;
+      case 'F': convertedTemp = (tempInCelsius * 9/5) + 32; break;
+      case 'K': convertedTemp = tempInCelsius + 273.15; break;
+    }
+
+    resultDiv.textContent = ${temp}°${from} = ${convertedTemp.toFixed(2)}°${to};
+  }
+
+  function convertArea() {
+    const area = parseFloat(document.getElementById('areaInput').value);
+    const from = document.getElementById('areaFrom').value;
+    const to = document.getElementById('areaTo').value;
+    const resultDiv = document.getElementById('areaResult');
+
+    if (isNaN(area)) {
+      resultDiv.textContent = 'Please enter a valid area.';
+      return;
+    }
+
+    // Convert input area to square meters
+    let areaInSqM;
+
+    switch(from) {
+      case 'sqm': areaInSqM = area; break;
+      case 'sqft': areaInSqM = area * 0.092903; break;
+      case 'acre': areaInSqM = area * 4046.86; break;
+    }
+
+    // Convert square meters to target unit
+    let convertedArea;
+    switch(to) {
+      case 'sqm': convertedArea = areaInSqM; break;
+      case 'sqft': convertedArea = areaInSqM / 0.092903; break;
+      case 'acre': convertedArea = areaInSqM / 4046.86; break;
+    }
+
+    resultDiv.textContent = ${area} ${from} = ${convertedArea.toFixed(4)} ${to};
+  }
+
+  function convertDistance() {
+    const dist = parseFloat(document.getElementById('distanceInput').value);
+    const from = document.getElementById('distanceFrom').value;
+    const to = document.getElementById('distanceTo').value;
+    const resultDiv = document.getElementById('distanceResult');
+
+    if (isNaN(dist)) {
+      resultDiv.textContent = 'Please enter a valid distance.';
+      return;
+    }
+
+    // Convert input distance to meters
+    let distInMeters;
+
+    switch(from) {
+      case 'm': distInMeters = dist; break;
+      case 'km': distInMeters = dist * 1000; break;
+      case 'mi': distInMeters = dist * 1609.34; break;
+      case 'ft': distInMeters = dist * 0.3048; break;
+    }
+
+    // Convert meters to target unit
+    let convertedDist;
+    switch(to) {
+      case 'm': convertedDist = distInMeters; break;
+      case 'km': convertedDist = distInMeters / 1000; break;
+      case 'mi': convertedDist = distInMeters / 1609.34; break;
+      case 'ft': convertedDist = distInMeters / 0.3048; break;
+    }
+
+    resultDiv.textContent = ${dist} ${from} = ${convertedDist.toFixed(4)} ${to};
+  }
+</script>
+
+</body>
+</html>
