@@ -1,94 +1,48 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect
 import sqlite3
+import os
 
 app = Flask(__name__)
-app.secret_key = 'secret123'
+DATABASE = 'database/library.db'
 
-
+# Create database if not exists
 def init_db():
-    conn = sqlite3.connect('database.db')
-    cur = conn.cursor()
-
-    # Create tables
-    cur.execute('''CREATE TABLE IF NOT EXISTS users (
-        username TEXT PRIMARY KEY,
-        password TEXT NOT NULL
-    )''')
-
-    cur.execute('''CREATE TABLE IF NOT EXISTS bookings (
-        username TEXT,
-        flight TEXT,
-        seat TEXT
-    )''')
-
-    conn.commit()
+    if not os.path.exists('database'):
+        os.mkdir('database')
+    conn = sqlite3.connect(DATABASE)
+    conn.execute('''CREATE TABLE IF NOT EXISTS books (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        title TEXT NOT NULL,
+                        author TEXT,
+                        year INTEGER
+                    )''')
     conn.close()
-
 
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
 
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/add', methods=['GET', 'POST'])
+def add_book():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        conn = sqlite3.connect('database.db')
-        cur = conn.cursor()
-
-        # Check if user exists
-        cur.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
-        user = cur.fetchone()
-
-        # If not, register the new user
-        if not user:
-            cur.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
-            conn.commit()
-
-        conn.close()
-        session['username'] = username
-        return redirect('/booking')
-
-    return render_template('login.html')
-
-
-@app.route('/booking', methods=['GET', 'POST'])
-def booking():
-    if 'username' not in session:
-        return redirect('/login')
-
-    username = session['username']
-    flights = ['IndiGo 6E-345', 'Air India AI-202', 'Vistara UK-101', 'SpiceJet SG-550', 'Qatar Airways QR-404']
-
-    conn = sqlite3.connect('database.db')
-    cur = conn.cursor()
-
-    if request.method == 'POST':
-        flight = request.form['flight']
-        seat = request.form['seat']
-        cur.execute("INSERT INTO bookings (username, flight, seat) VALUES (?, ?, ?)", (username, flight, seat))
+        title = request.form['title']
+        author = request.form['author']
+        year = request.form['year']
+        conn = sqlite3.connect(DATABASE)
+        conn.execute("INSERT INTO books (title, author, year) VALUES (?, ?, ?)", (title, author, year))
         conn.commit()
         conn.close()
-        return redirect('/booking?booked=1')
+        return redirect('/books')
+    return render_template('add_book.html')
 
-    # Get previous bookings
-    cur.execute("SELECT flight, seat FROM bookings WHERE username = ?", (username,))
-    previous_bookings = cur.fetchall()
+@app.route('/books')
+def books():
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM books")
+    data = cur.fetchall()
     conn.close()
-
-    booked = request.args.get('booked') == '1'
-
-    return render_template('booking.html', username=username, flights=flights, bookings=previous_bookings, booked=booked)
-
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect('/')
-
+    return render_template('book_list.html', books=data)
 
 if __name__ == '__main__':
     init_db()
